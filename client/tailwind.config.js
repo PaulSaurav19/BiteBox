@@ -18,11 +18,18 @@ module.exports = {
     },
     extend: {
       colors: {
+        customGrey: {
+          500: '#595959', // #181818
+        },
         customOrange: {
-          500: '#FC8019',
+          500: '#FF7E00',
+          600: '#FF8400',
         },
         customPink: {
           500: '#FA7070',
+        },
+        customBeige: {
+          500: '#f5eee5'
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
