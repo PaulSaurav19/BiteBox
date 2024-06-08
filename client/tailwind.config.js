@@ -18,8 +18,12 @@ module.exports = {
     },
     extend: {
       colors: {
+        customBlue: {
+            100: '#1d2d54',
+            500: '#111a30',
+        },
         customGrey: {
-          500: '#595959', // #181818
+          500: '#181818', // #181818
         },
         customOrange: {
           500: '#FF7E00',
