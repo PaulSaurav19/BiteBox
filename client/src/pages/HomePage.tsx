@@ -14,10 +14,10 @@ const HomePage = () => {
             <img src={landingImage}/>
             <div className="flex flex-col items-center justify-center gap-4 text-center">
                 <span className="font-bold text-3xl tracking-tighter">
-                    Order takeaway even faster!
+                    Elevate your ordering experience!
                 </span>
                 <span>
-                    Download the BiteBox app for faster ordering and personalised recommendations
+                Discover swift ordering and personalized recommendations with the BiteBox app.
                 </span>
                 <img src={appDownloadImage} />
             </div>

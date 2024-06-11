@@ -23,6 +23,7 @@ module.exports = {
             500: '#111a30',
         },
         customGrey: {
+          200: 'rgba(69, 89, 164, 0.5)',
           500: '#181818', // #181818
         },
         customOrange: {
