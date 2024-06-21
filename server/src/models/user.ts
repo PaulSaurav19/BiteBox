@@ -12,13 +12,26 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
     },
+    contactNumber: {
+        type: String,
+        required: true,
+    },
     addressLine1: {
+        type: String,
+    },
+    addressLine2: {
+        type: String,
+    },
+    country: {
         type: String,
     },
     city: {
         type: String,
     },
-    country: {
+    state: {
+        type: String,
+    },
+    pincode: {
         type: String,
     },
 });
