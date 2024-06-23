@@ -12,9 +12,9 @@ const formSchema = z.object({
     contactNumber: z.string().min(10, "contact Number is required"),
     addressLine1: z.string().min(1, "Address Line 1 is required"),
     addressLine2: z.string().optional(),
-    country: z.string().min(1, "Country is required"),
-    state: z.string().min(1, "State is required"),
     city: z.string().min(1, "City is required"),
+    state: z.string().min(1, "State is required"),
+    country: z.string().min(1, "Country is required"),
     pincode: z.string().min(5, "Pincode is required"),
 })
 
