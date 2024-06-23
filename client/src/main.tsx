@@ -4,8 +4,10 @@ import './global.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 import AppRoutes from './AppRoutes'
 import Auth0ProviderWithNavigate from './auth/Auth0ProviderWithNavigate'
-import { Toaster } from "react-hot-toast";
+import { Toaster as ReactHotToastToaster } from 'react-hot-toast'
+import { Toaster as SonnerToaster } from 'sonner'
 import { QueryClient, QueryClientProvider } from "react-query"
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,9 +23,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
      <QueryClientProvider client = {queryClient}>
       <Auth0ProviderWithNavigate>
       <AppRoutes />
+      <SonnerToaster visibleToasts={1} position='top-right' richColors />
       </Auth0ProviderWithNavigate>
       </QueryClientProvider>
     </Router>
-    <Toaster />
+    <ReactHotToastToaster />
   </React.StrictMode>,
 )
