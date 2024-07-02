@@ -12,6 +12,10 @@ const app = express(); // it will create a new express server and assign it to a
 app.use(express.json())
 app.use(cors())
 
+app.get("/health", async(req:Request, res:Response) => {
+    res.send({ message : "health OK!" })
+    });
+
 app.use("/api/my/user", myUserRoute);
 
 app.listen(8000, ()=> {
