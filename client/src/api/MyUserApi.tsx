@@ -75,7 +75,7 @@ type updateMyUserRequest = {
     name: string,
     contactNumber: string,
     addressLine1: string,
-    addressLine2: string,
+    addressLine2?: string, // allows undefined
     city: string,
     state: string,
     country: string,
