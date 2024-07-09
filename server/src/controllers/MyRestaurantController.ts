@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import cloudinary from "cloudinary";
 import mongoose from "mongoose";
-import { Restaurant } from "../models/restaurant";
+import Restaurant from "../models/restaurant";
 
 
 const uploadImage = async (file: Express.Multer.File) => {
@@ -9,7 +9,7 @@ const uploadImage = async (file: Express.Multer.File) => {
     const base64Image = Buffer.from(image.buffer).toString("base64");
     const dataURI = `data:${image.mimetype};base64,${base64Image}`;
   
-    const uploadResponse = await cloudinary.v2.uploader.upload(dataURI);
+    const uploadResponse = await cloudinary.v2.uploader.upload(dataURI, {folder: "bitebox",});
     return uploadResponse.url;
   };
 

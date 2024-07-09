@@ -37,18 +37,6 @@ export const validateMyRestaurantRequest = [
   body("menuItems.*.price").isFloat({ min: 0 }).withMessage("Price must be a positive number"),
   body("phoneNumber").isString().notEmpty().withMessage("Phone Number is required"),
   body("address").isString().notEmpty().withMessage("Address is required"),
- // body("menuItems.*.category").notEmpty().withMessage("Menu item category is required"),
-//   body("menuItems.*.available").isIn(['Yes', 'No']).withMessage("Menu item availability must be Yes or No"),
-//   body("menuItems.*.description").optional().isString().withMessage("Description must be a string"),
-  
-//   body("operatingHours.openingTime").isString().notEmpty().withMessage("Opening time is required"),
-//   body("operatingHours.closingTime").isString().notEmpty().withMessage("Closing time is required"),
-//   body("averageRating").optional().isFloat({ min: 0, max: 5 }).withMessage("Average rating must be between 0 and 5"),
-//   body("numberOfRatings").optional().isInt({ min: 0 }).withMessage("Number of ratings must be a positive integer"),
-//   body("reviews").optional().isArray().withMessage("Reviews must be an array"),
-//   body("specialties").optional().isArray().withMessage("Specialties must be an array"),
-//   body("status").optional().isIn(['Open', 'Closed']).withMessage("Status must be open or closed"),
-
 
   handleValidationErrors,
 ];
