@@ -23,6 +23,8 @@ const upload = multer({
 
 
 
+router.get("/", jwtCheck, jwtParse, MyRestaurantController.getMyRestaurant)
+
 // /api/my/restaurant
 // check the request body for the property called imageFile in binary form
 router.post(
