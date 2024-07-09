@@ -12,3 +12,27 @@ export type User = {
     country: string;
     pincode: string;
 }
+
+export type MenuItem = {
+    _id: string;
+    name: string;
+    price: number;
+};
+
+export type Restaurant = {
+    _id: string;
+    user: string;
+    restaurantName: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    pincode: string;
+    phoneNumber: string;
+    deliveryPrice: number;
+    estimatedDeliveryTime: number;
+    cuisines: string[];
+    menuItems: MenuItem[];
+    imageUrl: string;
+    lastUpdated: string;
+}

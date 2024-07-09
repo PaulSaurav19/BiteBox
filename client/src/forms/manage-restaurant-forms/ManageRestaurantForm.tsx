@@ -46,19 +46,6 @@ const formSchema = z.object({
         message: "please select at least one item",
     }),
 
-    // operatingHours: z.object({
-    //     openingTime: z.string({
-    //         required_error: "opening time is required",
-    //     }).min(1, "opening time is required"),
-    //     closingTime: z.string({
-    //         required_error: "closing time is required",
-    //     }).min(1, "closing time is required"),
-    // }),
-
-    // status: z.enum(['Open', 'Closed'], {
-    //     required_error: "status is required",
-    // }).default('Open'),
-
     menuItems: z.array(z.object({
         name: z.string().min(1, "name is required"),
         price: z.coerce.number().min(1, "price is required"),
@@ -68,15 +55,15 @@ const formSchema = z.object({
 
 })
 
-type restaurantFormData = z.infer<typeof formSchema>
+type RestaurantFormData = z.infer<typeof formSchema>
 
 type Props = {
-  OnSave: (restaurantFormData: FormData) => void;
+  onSave: (restaurantFormData: FormData) => void;
   isLoading: boolean;
 };
 
-const ManageRestaurantForm = ({OnSave, isLoading}: Props) => {
-  const form = useForm<restaurantFormData>({
+const ManageRestaurantForm = ({onSave, isLoading}: Props) => {
+  const form = useForm<RestaurantFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
     cuisines: [],
@@ -84,9 +71,34 @@ const ManageRestaurantForm = ({OnSave, isLoading}: Props) => {
     },
 });
 
-    const onSubmit = (formDataJson: restaurantFormData) => {
+    const onSubmit = (formDataJson: RestaurantFormData) => {
         // we have to convert formDataJson to formDataobject
+        const formData = new FormData();
 
+        formData.append("restaurantName", formDataJson.restaurantName);
+        formData.append("address", formDataJson.address);
+        formData.append("city", formDataJson.city);
+        formData.append("state", formDataJson.state);
+        formData.append("country", formDataJson.country);
+        formData.append("pincode", formDataJson.pincode);
+        formData.append("phoneNumber", formDataJson.phoneNumber);
+        formData.append("deliveryPrice", (formDataJson.deliveryPrice * 100).toString());
+        formData.append("estimatedDeliveryTime", formDataJson.estimatedDeliveryTime.toString());
+
+
+        formDataJson.cuisines.forEach((cuisine, index) => {
+            formData.append(`cuisines[${index}]`, cuisine);
+        });
+
+        formDataJson.menuItems.forEach((menuItem, index) => {
+            formData.append(`menuItems[${index}][name]`, menuItem.name);
+            formData.append(`menuItems[${index}][price]`, (menuItem.price * 100).toString());
+
+        });
+        
+        formData.append(`imageFile`, formDataJson.imageFile);
+
+        onSave(formData);
     }
     return (
         <Form {...form}>
