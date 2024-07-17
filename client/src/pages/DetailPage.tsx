@@ -1,9 +1,10 @@
 import { useGetRestaurant } from "@/api/RestaurantApi";
+import CheckoutButton from "@/components/CheckoutButton";
 import MenuItems from "@/components/MenuItems";
 import OrderSummary from "@/components/OrderSummary";
 import RestaurantInfo from "@/components/RestaurantInfo";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Card } from "@/components/ui/card";
+import { Card, CardFooter } from "@/components/ui/card";
 import { MenuItem } from "@/types";
 import { Utensils } from "lucide-react";
 import { useState } from "react";
@@ -60,6 +61,9 @@ const DetailPage = () => {
             updatedCartItems = [...prevCartItems];
         }
 
+        // we have stored the menu items in the state and state is just stored in javascript
+        //and the user's browser so any time the app reloads the javascript is going to reload
+        // and its goint to lose all the state
         sessionStorage.setItem(
             `cartItems-${restaurantId}`,
             JSON.stringify(updatedCartItems)
@@ -81,7 +85,7 @@ const DetailPage = () => {
                 `cartItems-${restaurantId}`,
                 JSON.stringify(updatedCartItems)
               );
-              
+
             return updatedCartItems;
         });
   };
@@ -113,9 +117,11 @@ const DetailPage = () => {
         <div>
           <Card className="shadow-md rounded-lg">
             <OrderSummary restaurant={restaurant} cartItems={cartItems} removeFromCart={removeFromCart}/>
+            <CardFooter>
+              <CheckoutButton />
+            </CardFooter>
           </Card>
-        </div>
-            
+        </div>  
         </div>
         </div>
 
