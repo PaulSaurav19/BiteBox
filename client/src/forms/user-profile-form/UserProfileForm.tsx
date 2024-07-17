@@ -21,15 +21,17 @@ const formSchema = z.object({
 })
 
 // its using zod framework to automatically determine the type based on formSchema
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
     currentUser: User;
   onSave: (userProfileData: UserFormData)=> void;
   isLoading: boolean;
-}
+  title?: string;
+  buttonText?: string;
+};
 
-const UserProfileForm = ({onSave, isLoading, currentUser }: Props) => {
+const UserProfileForm = ({onSave, isLoading, currentUser, title = "User Profile", buttonText = "Submit", }: Props) => {
      const form = useForm<UserFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: currentUser,
@@ -45,7 +47,7 @@ const UserProfileForm = ({onSave, isLoading, currentUser }: Props) => {
             className="space-y-4 bg-gray-50 rounded-lg md:p-10">
 
             <div>
-                <h2 className="text-2xl font-bold">User Profile</h2>
+                <h2 className="text-2xl font-bold">{title}</h2>
                 <FormDescription>
                     View and Change your profile information here
                 </FormDescription>
@@ -159,7 +161,7 @@ const UserProfileForm = ({onSave, isLoading, currentUser }: Props) => {
             {isLoading ? (
                 <LoadingButton /> 
             ) : (
-                <Button type="submit" className="bg-customOrange-500">Submit</Button>
+                <Button type="submit" className="bg-customOrange-500">{buttonText}</Button>
             )}
             </form>  
         </Form>
