@@ -5,6 +5,7 @@ import OrderSummary from "@/components/OrderSummary";
 import RestaurantInfo from "@/components/RestaurantInfo";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardFooter } from "@/components/ui/card";
+import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
 import { MenuItem } from "@/types";
 import { Utensils } from "lucide-react";
 import { useState } from "react";
@@ -90,6 +91,11 @@ const DetailPage = () => {
         });
   };
 
+  const onCheckout = (userFormData: UserFormData) => {
+    console.log("userFormData", userFormData);
+    
+  }
+
   if (isLoading || !restaurant) {
     return "Loading...";
   }
@@ -118,13 +124,15 @@ const DetailPage = () => {
           <Card className="shadow-md rounded-lg">
             <OrderSummary restaurant={restaurant} cartItems={cartItems} removeFromCart={removeFromCart}/>
             <CardFooter>
-              <CheckoutButton />
+              <CheckoutButton disabled={cartItems.length === 0} onCheckout={onCheckout}/>
             </CardFooter>
           </Card>
         </div>  
         </div>
         </div>
 
+
+// user has not added any item then the checkout button is disabled
         
 
     );
