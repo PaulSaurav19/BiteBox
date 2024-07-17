@@ -1,14 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MenuItem } from '../types';
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 type Props = {
   menuItem: MenuItem;
   addToCart: (menuItem: MenuItem,  action: 'increment' | 'decrement') => void;
+  resetItemId: string | null;
 };
 
-const MenuItems = ({ menuItem, addToCart }: Props) => {
-  const [quantity, setQuantity] = useState(0);
+const MenuItems = ({ menuItem, addToCart, resetItemId  }: Props) => {
+  const [quantity, setQuantity] = useState(() => {
+    // Initialize quantity from sessionStorage or default to 0
+    const storedQuantity = sessionStorage.getItem(`menuItem-${menuItem._id}`);
+    return storedQuantity ? parseInt(storedQuantity, 10) : 0;
+  });
+
+  useEffect(() => {
+    // Save quantity to sessionStorage whenever it changes
+    sessionStorage.setItem(`menuItem-${menuItem._id}`, quantity.toString());
+  }, [quantity, menuItem._id]);
+
+  useEffect(() => {
+    if (resetItemId === menuItem._id) {
+      setQuantity(0); // Reset the quantity to zero for the specific item
+    }
+  }, [resetItemId, menuItem._id]);
 
   const increment = () => { 
     setQuantity(quantity + 1);

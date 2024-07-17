@@ -5,6 +5,7 @@ import RestaurantInfo from "@/components/RestaurantInfo";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card } from "@/components/ui/card";
 import { MenuItem } from "@/types";
+import { Utensils } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -24,6 +25,8 @@ const DetailPage = () => {
     const storedCartItems = sessionStorage.getItem(`cartItems-${restaurantId}`);
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
+
+  const [resetItemId, setResetItemId] = useState<string | null>(null);
 
   const addToCart = (menuItem: MenuItem, action: 'increment' | 'decrement') => {
     setCartItems((prevCartItems) => {
@@ -56,9 +59,31 @@ const DetailPage = () => {
         else {
             updatedCartItems = [...prevCartItems];
         }
+
+        sessionStorage.setItem(
+            `cartItems-${restaurantId}`,
+            JSON.stringify(updatedCartItems)
+          );
             
             return updatedCartItems;
     });
+  };
+
+  const removeFromCart = (cartItem: CartItem) => {
+        setCartItems((prevCartItems) => {
+            const updatedCartItems = prevCartItems.filter(
+                (item) => cartItem._id !== item._id
+            );
+            setResetItemId(cartItem._id); // Set resetItemId to trigger MenuItems reset
+            setTimeout(() => setResetItemId(null), 0); // Reset resetItemId
+
+            sessionStorage.setItem(
+                `cartItems-${restaurantId}`,
+                JSON.stringify(updatedCartItems)
+              );
+              
+            return updatedCartItems;
+        });
   };
 
   if (isLoading || !restaurant) {
@@ -66,7 +91,7 @@ const DetailPage = () => {
   }
 
   return (
-    <div className="flex flex-col gap-10 px-8">
+    <div className="flex flex-col gap-10">
       <AspectRatio ratio={16 / 5}>
         <img
           src={restaurant.imageUrl}
@@ -76,15 +101,18 @@ const DetailPage = () => {
       <div className="grid md:grid-cols-[4fr_2fr] gap-5 md:px-32">
         <div className="flex flex-col gap-6">
             <RestaurantInfo restaurant={restaurant} />
-            <span className="text-2xl font-bold tracking-tight">Menu</span>
+            <div className="flex items-center space-x-2 text-2xl font-bold tracking-tight">
+            <span>Menu</span>
+            <Utensils className="text-customOrange-600 w-6 h-6" />
+          </div>
             {restaurant.menuItems.map((menuItem) => (
-            <MenuItems key={menuItem._id} menuItem={menuItem} addToCart={(menuItem, action) => addToCart(menuItem, action)}/>
+            <MenuItems key={menuItem._id} menuItem={menuItem} addToCart={(menuItem, action) => addToCart(menuItem, action)} resetItemId={resetItemId}/>
           ))}
         </div>
 
         <div>
           <Card className="shadow-md rounded-lg">
-            <OrderSummary restaurant={restaurant} cartItems={cartItems} />
+            <OrderSummary restaurant={restaurant} cartItems={cartItems} removeFromCart={removeFromCart}/>
           </Card>
         </div>
             
