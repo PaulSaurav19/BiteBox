@@ -29,7 +29,16 @@ const MainNav = () => {
     <span className="flex space-x-2 items-center">
       {isAuthenticated ? (
         <>
-          <Link to="/order-status" className="font-bold hover:text-customOrange-500">
+          <Link to="/order-status" className="
+    font-bold 
+    text-black-600 
+    hover:text-customOrange-500
+    transition 
+    duration-300 
+    ease-in-out 
+    transform 
+    hover:scale-105"
+    >
              Order Status 
           </Link>
            <UsernameMenu /> 
