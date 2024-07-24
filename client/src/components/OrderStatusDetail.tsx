@@ -11,7 +11,7 @@ const OrderStatusDetail = ({order}: Props) => {
     <div className="flex flex-col">
         <span className="font-bold">Delivering to: </span>
         <span>{order.deliveryDetails.name}</span>
-        <span>{order.deliveryDetails.addressLine1}, {order.deliveryDetails.city}, {order.deliveryDetails.state}, {order.deliveryDetails.country}-{order.deliveryDetails.pincode}</span>
+        <span>{order.deliveryDetails.addressLine1},  {order.deliveryDetails.addressLine2}, {order.deliveryDetails.city}, {order.deliveryDetails.state}, {order.deliveryDetails.country}-{order.deliveryDetails.pincode}</span>
     </div>
     <div className="flex flex-col">
         <span className="font-bold">Your Order</span>
