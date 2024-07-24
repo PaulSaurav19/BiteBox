@@ -22,9 +22,12 @@ const upload = multer({
 // ]);
 
 
-router.get("/order",jwtCheck, jwtParse, MyRestaurantController.getMyRestaurantOrders)
+router.get("/order",jwtCheck, jwtParse, MyRestaurantController.getMyRestaurantOrders);
 
-router.get("/", jwtCheck, jwtParse, MyRestaurantController.getMyRestaurant)
+// patch is a restful verb which only updates the part of the entity not the entire entity as in put request
+router.patch("/order/:orderId/status", jwtCheck, jwtParse, MyRestaurantController.updateOrderStatus);
+
+router.get("/", jwtCheck, jwtParse, MyRestaurantController.getMyRestaurant);
 
 // /api/my/restaurant
 // check the request body for the property called imageFile in binary form
