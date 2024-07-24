@@ -26,7 +26,11 @@ export const useGetMyOrders = () => {
   };
 
   // we need to pas the getMyOrdersRequest function to the query
-  const {data: orders, isLoading} = useQuery("fetchMyOrders", getMyOrdersRequest);
+  const {data: orders, isLoading} = useQuery("fetchMyOrders", getMyOrdersRequest,
+    {
+      refetchInterval: 3000, // react query will perform the orders fetch after every 3 seconds
+    }
+  );
 
   return {orders, isLoading};
 }
