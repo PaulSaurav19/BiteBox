@@ -12,7 +12,7 @@ type Props = {
   removeFromCart: (cartItem: CartItem) => void;
 }
 
-const OrderSummary = ({restaurant, cartItems, removeFromCart}: Props) => {
+const OrderSummary = ({restaurant, cartItems, removeFromCart }: Props) => {
 
     const getTotalCost = () => {
         const totalInPence = cartItems.reduce(
@@ -24,8 +24,8 @@ const OrderSummary = ({restaurant, cartItems, removeFromCart}: Props) => {
     
         return (totalWithDelivery / 100).toFixed(2);
       };
-    
 
+  
   return (
     <>
     <CardHeader>
