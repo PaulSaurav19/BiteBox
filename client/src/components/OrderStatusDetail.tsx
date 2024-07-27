@@ -1,15 +1,21 @@
 import { Order } from "@/types";
 import { Separator } from "./ui/separator";
 
-
 type Props = {
  order: Order; 
 }
 
 const OrderStatusDetail = ({order}: Props) => {
-  return <div className="space-y-5">
+
+  return (
+  <div className="space-y-5">
     <div className="flex flex-col">
-        <span className="font-bold">Delivering to: </span>
+    <div className="flex items-center">
+    <span className="font-bold">Restaurant name:</span>
+    <span className="font-normal ml-1">{order.restaurant.restaurantName}</span>
+    </div>
+
+    <span className="font-bold">Delivering to: </span>
         <span>{order.deliveryDetails.name}</span>
         <span>{order.deliveryDetails.addressLine1},  {order.deliveryDetails.addressLine2}, {order.deliveryDetails.city}, {order.deliveryDetails.state}, {order.deliveryDetails.country}-{order.deliveryDetails.pincode}</span>
     </div>
@@ -29,6 +35,7 @@ const OrderStatusDetail = ({order}: Props) => {
         <span>₹{(order.totalAmount / 100).toFixed(2)}</span>
     </div>
   </div>
-}
+  );
+};
 
 export default OrderStatusDetail;
