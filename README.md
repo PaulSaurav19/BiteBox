@@ -1,7 +1,7 @@
 # BiteBox
 <h1 align="center">BITEBOX</h1>
 <p align="center">
-<img alt="Logo" width="142px" src="client/src/assets/AppLogoFinal.png"/>
+<img alt="Logo" width="142px" src="client/src/assets/githubAppLogo.png" />
 </p>
 
 <h3 align="center">A robust food ordering and delivery platform built using the toolset from the MERN stack.</h3>
@@ -55,7 +55,6 @@
 - Real-Time Order Tracking: Track the status of your order from preparation to delivery and remaining time based on current status.
 - Estimated Delivery Time: Get accurate delivery time estimates for your orders.
 - Cloudinary Integration: Seamless management and upload of images for restaurants.
-.
 
 
 <br />
@@ -81,7 +80,7 @@ This project was built using React, Redux, Sass, HTML, JavaScript, Rest API, Nod
 
 1) Clone the repository using:
 ```bash
-https://github.com/PaulSaurav19/WorkHive-Project.git
+https://github.com/PaulSaurav19/BiteBox.git
 ```
 2) Run the following in both the "client" and "server" folders:
 ```bash
@@ -91,31 +90,48 @@ npm install
 
 ### Server
 ```
-`JWT_SECRET`
-e.g. this_is_secret_123
-
-`MONGODB_URI`
+`MONGODB_CONNECTION_STRING`
 e.g. mongodb cluster URI
 
-`STRIPE_SECRET`
-e.g. Secret key from stripe dashboard
+`AUTH0_AUDIENCE`
+e.g. "project-name-api"
 
-`NODE_ENV`
-e.g. 'development' for local and 'production' for production
+`CLOUDINARY_CLOUD_NAME`
+e.g. cloud name from the cloudinary dashboard
 
-`DEV_CORS_ORIGIN`
-e.g. http://localhost:6173 (client localhost)
+`CLOUDINARY_API_KEY`
+e.g. api key from the cloudinary dashboard
 
-`PROD_CORS_ORIGIN`
-e.g. client deployed link (https://yourProjectName.com) 
+`CLOUDINARY_API_SECRET`
+e.g. secret key from the cloudinary dashboard
+
+`FRONTEND_URL`
+e.g. http://localhost:3000 or the production deployed client link
+
+`STRIPE_API_KEY`
+e.g. stripe secret key from the stripe dashboard
+
+`STRIPE_WEBHOOK_SECRET`
+e.g. webhook secret from the stripe dashboard
+
 ```
 ### Client
 ```
-`VITE_API_URL`
-e.g. http://localhost:3000/api or production deployed server link
+`VITE_API_BASE_URL`
+e.g. http://localhost:7000 or production deployed server link
 
-`VITE_STRIPE_PUBLISHABLE_KEY`
-e.g. Publishable key from stripe dashboard
+`VITE_AUTH0_DOMAIN`
+e.g. `dev-examole.us.auth0.com`
+
+`VITE_AUTH0_CLIENT_ID`
+e.g. client ID from the auth0 dashboard
+
+`VITE_AUTH0_CALLBACK_URL`
+e.g  http://localhost:3000 or the production deployed client link
+
+VITE_AUTH0_AUDIENCE
+e.g. "project-name-api"
+
 ```
 4) Run following in both "client" and "server" folders:
 ```bash
@@ -125,15 +141,17 @@ npm start
 <a name="projectLink"></a> 
 ## Website Link
 
-* [Workhive](https://workhive-one.vercel.app)
+* [BiteBox](https://biteboxone.onrender.com)
 
 
 <a name="depend"></a>
 ## Tech-Stack Used
 
-* NodeJS(ExpressJS) 
+* NodeJS
+* ExpressJS
 * React JS
-* SASS
+* ShadCn UI
+* Tailwind CSS
 * Vite-JS Template
 * JavaScript
 * MongoDB (as Database)
@@ -143,6 +161,7 @@ npm start
 
 * Stripe(to monitor payments)
 * Postman
+* Auth0
 
 <a name="contri"></a>
 ## Contributors
