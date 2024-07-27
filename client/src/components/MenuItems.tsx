@@ -23,6 +23,7 @@ const MenuItems = ({ menuItem, addToCart, resetItemId  }: Props) => {
   useEffect(() => {
     if (resetItemId === menuItem._id) {
       setQuantity(0); // Reset the quantity to zero for the specific item
+      sessionStorage.removeItem(`menuItem-${menuItem._id}`);
     }
   }, [resetItemId, menuItem._id]);
 
