@@ -2,9 +2,28 @@ import { useGetMyOrders } from "@/api/OrderApi";
 import OrderStatusDetail from "@/components/OrderStatusDetail";
 import OrderStatusHeader from "@/components/OrderStatusHeader";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useEffect } from "react";
+import { Order } from "@/types";
 
 const OrderStatusPage = () => {
   const {orders, isLoading} = useGetMyOrders();
+
+  useEffect(() => {
+   const queryParams = new URLSearchParams(window.location.search);
+   const paymentSuccess = queryParams.get("success") === "true";
+   const restaurantId = queryParams.get("restaurantId");
+
+   if (paymentSuccess && restaurantId) {
+      sessionStorage.removeItem(`cartItems-${restaurantId}`);
+
+      orders?.forEach((order: Order) => {
+         order.cartItems.forEach(item => {
+           sessionStorage.removeItem(`menuItem-${item.menuItemId}`);
+         });
+       });
+      }
+   }, [orders]);
+
 
   if(isLoading) {
     return "Loading...";
@@ -13,9 +32,14 @@ const OrderStatusPage = () => {
     return "No orders found";
  }
 
+  // Sort orders by creation date in descending order
+  const sortedOrders = orders.sort((a, b) => {
+   return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+ });
+
  return (
     <div className="space-y-10">
-       {orders.map((order) =>(
+       {sortedOrders.map((order) =>(
         <div className="space-y-10 bg-gray-50 p-10 rounded-lg">
             <OrderStatusHeader order={order} />
             <div className="grid gap-10 md:grid-cols-2">
