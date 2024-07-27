@@ -28,21 +28,33 @@ const OrderItemCard = ({ order }: Props) => {
     setStatus(newStatus);
   }
 
+  const getFormattedDate = () => {
+    const orderDateTime = new Date(order.createdAt);
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    return orderDateTime.toLocaleDateString(undefined, options);
+  };
+
   const getTime = () => {
     const orderDateTime = new Date(order.createdAt);
 
-    const hours = orderDateTime.getHours();
+    let hours = orderDateTime.getHours();
     const minutes = orderDateTime.getMinutes();
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+
+
+  // Convert 24-hour format to 12-hour format
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
 
     const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
-    return `${hours}:${paddedMinutes}`;
+    return `${hours}:${paddedMinutes} ${amPm}`;
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="grid md:grid-cols-4 gap-4 justify-between mb-3">
+        <CardTitle className="grid md:grid-cols-5 gap-5 justify-between mb-3">
           <div>
             Customer Name:
             <span className="ml-2 font-normal">
@@ -54,6 +66,10 @@ const OrderItemCard = ({ order }: Props) => {
             <span className="ml-2 font-normal">
               {order.deliveryDetails.addressLine1}, {order.deliveryDetails.addressLine2}, {order.deliveryDetails.city}, {order.deliveryDetails.state}, {order.deliveryDetails.country}-{order.deliveryDetails.pincode}
             </span>
+          </div>
+          <div>
+            Date:
+            <span className="ml-2 font-normal">{getFormattedDate()}</span>
           </div>
           <div>
             Time:
