@@ -168,6 +168,7 @@ npm start
 
 * [Sourav Paul](https://github.com/PaulSaurav19)
 * [Vishesh Agrawal](https://github.com/Vishesh-MNNIT)
+* [Aditya Singh](https://github.com/d-haku)
 
 ## Feedback
 Feel free to file an issue if you come across any bugs
