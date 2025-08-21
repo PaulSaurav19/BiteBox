@@ -10,20 +10,20 @@ type Props = {
 
 const MenuItems = ({ menuItem, addToCart, resetItemId  }: Props) => {
   const [quantity, setQuantity] = useState(() => {
-    // Initialize quantity from sessionStorage or default to 0
-    const storedQuantity = sessionStorage.getItem(`menuItem-${menuItem._id}`);
+    // Initialize quantity from localStorage or default to 0
+    const storedQuantity = localStorage.getItem(`menuItem-${menuItem._id}`);
     return storedQuantity ? parseInt(storedQuantity, 10) : 0;
   });
 
   useEffect(() => {
-    // Save quantity to sessionStorage whenever it changes
-    sessionStorage.setItem(`menuItem-${menuItem._id}`, quantity.toString());
+    // Save quantity to localStorage whenever it changes
+    localStorage.setItem(`menuItem-${menuItem._id}`, quantity.toString());
   }, [quantity, menuItem._id]);
 
   useEffect(() => {
     if (resetItemId === menuItem._id) {
       setQuantity(0); // Reset the quantity to zero for the specific item
-      sessionStorage.removeItem(`menuItem-${menuItem._id}`);
+      localStorage.removeItem(`menuItem-${menuItem._id}`);
     }
   }, [resetItemId, menuItem._id]);
 

@@ -11,6 +11,11 @@ const UsernameMenu = () => {
 
      // Function to handle logout and clear localStorage
   const handleLogout = () => {
+    // clear all cart items from localStorage upon logout
+    Object.keys(localStorage)
+    .filter(key => key.startsWith('menuItem-'))
+    .forEach(key => localStorage.removeItem(key));
+    
     localStorage.removeItem("toastShown"); // Clear localStorage item
     logout(); // Logout user
     toast.success("Logged out successfully!", {

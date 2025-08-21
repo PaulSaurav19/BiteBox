@@ -37,6 +37,11 @@ const OrderStatusHeader = ({ order }: Props) => {
     }, [deadline]);
 
     useEffect(() => {
+        if (order.status === 'delivered') {
+        localStorage.removeItem(`deadline_${order._id}`);
+        setRemainingTime("Delivered");
+        return;
+        }
         const fetchOrderDetails = async () => {
             try {
                 // Calculate the initial deadline using restaurant's estimated delivery time
