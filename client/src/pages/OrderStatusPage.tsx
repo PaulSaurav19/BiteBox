@@ -14,11 +14,11 @@ const OrderStatusPage = () => {
    const restaurantId = queryParams.get("restaurantId");
 
    if (paymentSuccess && restaurantId) {
-      sessionStorage.removeItem(`cartItems-${restaurantId}`);
+      localStorage.removeItem(`cartItems-${restaurantId}`);
 
       orders?.forEach((order: Order) => {
          order.cartItems.forEach(item => {
-           sessionStorage.removeItem(`menuItem-${item.menuItemId}`);
+           localStorage.removeItem(`menuItem-${item.menuItemId}`);
          });
        });
       }

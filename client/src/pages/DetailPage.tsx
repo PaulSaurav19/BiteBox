@@ -26,7 +26,7 @@ const DetailPage = () => {
   const { createCheckoutSession, isLoading: isCheckoutLoading} = useCreateCheckoutSession();
 
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    const storedCartItems = sessionStorage.getItem(`cartItems-${restaurantId}`);
+    const storedCartItems = localStorage.getItem(`cartItems-${restaurantId}`);
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
 
@@ -67,7 +67,7 @@ const DetailPage = () => {
         // we have stored the menu items in the state and state is just stored in javascript
         //and the user's browser so any time the app reloads the javascript is going to reload
         // and its goint to lose all the state
-        sessionStorage.setItem(
+        localStorage.setItem(
             `cartItems-${restaurantId}`,
             JSON.stringify(updatedCartItems)
           );
@@ -84,7 +84,7 @@ const DetailPage = () => {
             setResetItemId(cartItem._id); // Set resetItemId to trigger MenuItems reset
             setTimeout(() => setResetItemId(null), 0); // Reset resetItemId
 
-            sessionStorage.setItem(
+            localStorage.setItem(
                 `cartItems-${restaurantId}`,
                 JSON.stringify(updatedCartItems)
               );

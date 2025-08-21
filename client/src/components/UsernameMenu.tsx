@@ -8,14 +8,18 @@ import toast from "react-hot-toast";
 
 const UsernameMenu = () => {
     const {user, logout} = useAuth0();
-
-     // Function to handle logout and clear localStorage
-  const handleLogout = () => {
+    // Function to handle logout and clear localStorage
+    const handleLogout = () => {
     // clear all cart items from localStorage upon logout
-    Object.keys(localStorage)
-    .filter(key => key.startsWith('menuItem-'))
+     Object.keys(localStorage)
+    .filter(key => key.startsWith('cartItems-'))
     .forEach(key => localStorage.removeItem(key));
     
+    // clears all menuItems from localStorage upon logout
+     Object.keys(localStorage)
+    .filter(key => key.startsWith('menuItem-'))
+    .forEach(key => localStorage.removeItem(key));
+
     localStorage.removeItem("toastShown"); // Clear localStorage item
     logout(); // Logout user
     toast.success("Logged out successfully!", {
